@@ -2,6 +2,7 @@
 
 from src import video
 from .video_library import VideoLibrary
+from .video_playlist import Playlist
 from random import choice
 
 class VideoPlayer:
@@ -10,10 +11,14 @@ class VideoPlayer:
     def __init__(self):
         self._video_library = VideoLibrary()
         self._current_playing_video = None
+        self._playlists = {}
 
     # Utility functions
     def sort_videos_by_title(self, video):
         return video.title
+
+    def normalize_playlist_name(self, playlist_name):
+        return playlist_name.replace(" ", "").lower()
 
     def number_of_videos(self):
         num_videos = len(self._video_library.get_all_videos())
@@ -126,7 +131,13 @@ class VideoPlayer:
         Args:
             playlist_name: The playlist name.
         """
-        print("create_playlist needs implementation")
+        
+        name = self.normalize_playlist_name(playlist_name)
+        if name in self._playlists:
+            print("Cannot create playlist: A playlist with the same name already exists")
+        else:
+            self._playlists[name] = Playlist()
+            print(f"Successfully created new playlist: {playlist_name}")
 
     def add_to_playlist(self, playlist_name, video_id):
         """Adds a video to a playlist with a given name.
