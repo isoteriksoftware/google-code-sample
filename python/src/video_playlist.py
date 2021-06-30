@@ -22,7 +22,7 @@ class Playlist:
         return self._formatted_name
 
     def has_video(self, video):
-        return video.title in self._videos
+        return video.video_id in self._videos
     
     def add_video(self, video):
-        self._videos.append(video.title)
+        self._videos.append(video.video_id)
