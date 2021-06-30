@@ -30,7 +30,7 @@ python3 -m src.run
 ```
 
 You can close the app by typing `EXIT` as a command.
-
+ 
 #### Running the tests
 To run all the tests:
 ```shell script

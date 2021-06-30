@@ -9,6 +9,10 @@ class VideoPlayer:
     def __init__(self):
         self._video_library = VideoLibrary()
 
+    # Utility functions
+    def sort_videos_by_title(self, video):
+        return video.title
+
     def number_of_videos(self):
         num_videos = len(self._video_library.get_all_videos())
         print(f"{num_videos} videos in the library")
@@ -16,7 +20,13 @@ class VideoPlayer:
     def show_all_videos(self):
         """Returns all videos."""
 
-        print("show_all_videos needs implementation")
+        videos = self._video_library.get_all_videos()
+        videos.sort(key = self.sort_videos_by_title)
+
+        print("Here's a list of all available videos:")
+
+        for video in videos:
+            print(f"\t {video.title} ({video.video_id}) [{' '.join(video.tags)}]")
 
     def play_video(self, video_id):
         """Plays the respective video.
