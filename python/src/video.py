@@ -47,3 +47,11 @@ class Video:
     def stop(self):
         self._is_playing = False
         self._is_paused = False
+
+    @property
+    def is_paused(self) -> bool:
+        return self._is_paused
+
+    @property
+    def is_playing(self) -> bool:
+        return self._is_playing
