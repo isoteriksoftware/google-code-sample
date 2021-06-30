@@ -374,7 +374,7 @@ class VideoPlayer:
 
         if video.is_playing or video.is_paused:
             self.stop_video()
-            
+
         print(f"Successfully flagged video: {video.title} (reason: {reason})")
 
     def allow_video(self, video_id):
@@ -383,4 +383,14 @@ class VideoPlayer:
         Args:
             video_id: The video_id to be allowed again.
         """
-        print("allow_video needs implementation")
+        
+        video = self._video_library.get_video(video_id)
+        if not video:
+            print("Cannot remove flag from video: Video does not exist")
+            return
+
+        if not video.is_flagged:
+            print("Cannot remove flag from video: Video is not flagged")
+            return
+
+        print(f"Successfully removed flag from video: {video.title}")
