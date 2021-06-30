@@ -29,3 +29,6 @@ class Playlist:
 
     def remove_video(self, video):
         self._videos.remove(video.video_id)
+
+    def clear(self):
+        self._videos.clear()
