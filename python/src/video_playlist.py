@@ -26,3 +26,6 @@ class Playlist:
     
     def add_video(self, video):
         self._videos.append(video.video_id)
+
+    def remove_video(self, video):
+        self._videos.remove(video.video_id)
