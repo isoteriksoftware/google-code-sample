@@ -10,6 +10,8 @@ class Video:
         """Video constructor."""
         self._title = video_title
         self._video_id = video_id
+        self._is_playing = False
+        self._is_paused = False
 
         # Turn the tags into a tuple here so it's unmodifiable,
         # in case the caller changes the 'video_tags' they passed to us
@@ -29,3 +31,19 @@ class Video:
     def tags(self) -> Sequence[str]:
         """Returns the list of tags of a video."""
         return self._tags
+
+    def play(self):
+        self._is_playing = True
+        self._is_paused = False
+
+    def pause(self):
+        self._is_playing = False
+        self._is_paused = True
+
+    def resume(self):
+        self._is_playing = True
+        self._is_paused = False
+
+    def stop(self):
+        self._is_playing = False
+        self._is_paused = False

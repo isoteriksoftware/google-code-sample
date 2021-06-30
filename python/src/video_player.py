@@ -1,7 +1,8 @@
 """A video player class."""
 
+from src import video
 from .video_library import VideoLibrary
-
+from random import choice
 
 class VideoPlayer:
     """A class used to represent a Video Player."""
@@ -21,7 +22,10 @@ class VideoPlayer:
     def show_all_videos(self):
         """Returns all videos."""
 
+        # Get the videos
         videos = self._video_library.get_all_videos()
+
+        # Sort by title
         videos.sort(key = self.sort_videos_by_title)
 
         print("Here's a list of all available videos:")
@@ -44,10 +48,12 @@ class VideoPlayer:
             # Stop any playing video
             if (self._current_playing_video):
                 print(f"Stopping video: {self._current_playing_video.title}")
+                self._current_playing_video.stop()
             
             # Play the current video
             self._current_playing_video = video
             print(f"Playing video: {self._current_playing_video.title}")
+            self._current_playing_video.play()
         else:
             print("Cannot play video: Video does not exist")
 
@@ -57,6 +63,7 @@ class VideoPlayer:
         # Stop the current playing video
         if (self._current_playing_video):
             print(f"Stopping video: {self._current_playing_video.title}")
+            self._current_playing_video.stop()
             self._current_playing_video = None
         else:
             print("Cannot stop video: No video is currently playing")
@@ -64,7 +71,17 @@ class VideoPlayer:
     def play_random_video(self):
         """Plays a random video from the video library."""
 
-        print("play_random_video needs implementation")
+        # Get the videos
+        videos = self._video_library.get_all_videos()
+        if len(videos) == 0:
+            print("No videos available")
+            return
+
+        # Get a random video to play
+        random_video = choice(videos)
+
+        # Play the video
+        self.play_video(random_video.video_id)
 
     def pause_video(self):
         """Pauses the current video."""
