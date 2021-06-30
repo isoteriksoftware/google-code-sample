@@ -283,7 +283,7 @@ class VideoPlayer:
 
         print("Would you like to play any of the above? If yes, specify the number of the video.")
         print("If your answer is not a valid number, we will assume it's a no.")
-        
+
         chosen = input()
 
         if str.isnumeric(chosen):
@@ -297,7 +297,36 @@ class VideoPlayer:
         Args:
             video_tag: The video tag to be used in search.
         """
-        print("search_videos_tag needs implementation")
+        
+        videos = []
+        for video in self._video_library.get_all_videos():
+            for tag in video.tags:
+                if video_tag.lower() == tag.lower():
+                    videos.append(video)
+                    break
+
+        if len(videos) == 0:
+            print(f"No search results for {video_tag}")
+            return
+
+        videos.sort(key=self.sort_videos_by_title)
+
+        print(f"Here are the results for {video_tag}:")
+
+        index = 1
+        for video in videos:
+            print(f"\t{index}) {video.title} ({video.video_id}) [{' '.join(video.tags)}]")
+            index += 1
+
+        print("Would you like to play any of the above? If yes, specify the number of the video.")
+        print("If your answer is not a valid number, we will assume it's a no.")
+        
+        chosen = input()
+
+        if str.isnumeric(chosen):
+            chosen_index = int(chosen) - 1
+            if chosen_index >= 0 and chosen_index < len(videos):
+                self.play_video(videos[chosen_index].video_id)
 
     def flag_video(self, video_id, flag_reason=""):
         """Mark a video as flagged.
