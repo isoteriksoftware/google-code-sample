@@ -136,7 +136,7 @@ class VideoPlayer:
         if name in self._playlists:
             print("Cannot create playlist: A playlist with the same name already exists")
         else:
-            self._playlists[name] = Playlist()
+            self._playlists[name] = Playlist(playlist_name, name)
             print(f"Successfully created new playlist: {playlist_name}")
 
     def add_to_playlist(self, playlist_name, video_id):
