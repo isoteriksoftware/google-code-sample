@@ -12,6 +12,8 @@ class Video:
         self._video_id = video_id
         self._is_playing = False
         self._is_paused = False
+        self._is_flagged = False
+        self._flag_reason = ""
 
         # Turn the tags into a tuple here so it's unmodifiable,
         # in case the caller changes the 'video_tags' they passed to us
@@ -55,3 +57,15 @@ class Video:
     @property
     def is_playing(self) -> bool:
         return self._is_playing
+
+    @property
+    def is_flagged(self) -> bool:
+        return self._is_flagged
+
+    @property
+    def flag_reason(self) -> str:
+        return self._flag_reason
+
+    def flag(self, reason):
+        self._is_flagged = True
+        self._flag_reason = reason
