@@ -168,7 +168,14 @@ class VideoPlayer:
     def show_all_playlists(self):
         """Display all playlists."""
 
-        print("show_all_playlists needs implementation")
+        if len(self._playlists) == 0:
+            print("No playlists exist yet")
+            return
+
+        print("Showing all playlists:")
+        for name in sorted(self._playlists.keys()):
+            playlist = self._playlists[name]
+            print(f"\t{playlist.original_name}")
 
     def show_playlist(self, playlist_name):
         """Display all videos in a playlist with a given name.
